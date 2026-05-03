@@ -576,16 +576,20 @@ h1 {
   }
 
   .todo-item {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr) auto;
     min-height: 52px;
     padding: 8px 10px;
-    row-gap: 8px;
     column-gap: 10px;
-    align-items: start;
+    align-items: center;
   }
 
   .todo-item.editing {
     grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .todo-content {
+    align-self: center;
   }
 
   .priority-badge {
@@ -594,16 +598,21 @@ h1 {
   }
 
   .item-actions {
-    display: grid;
-    grid-column: 1 / -1;
-    grid-template-columns: 1fr 1fr;
-    justify-self: stretch;
-    width: 100%;
+    display: flex;
+    grid-column: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    justify-self: end;
+    align-self: center;
+    width: auto;
   }
 
   .item-actions button {
-    min-width: 0;
-    width: 100%;
+    min-width: 52px;
+    width: auto;
+    min-height: 34px;
+    padding: 0 8px;
+    white-space: nowrap;
   }
 
   .edit-form {
