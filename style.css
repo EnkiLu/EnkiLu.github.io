@@ -576,20 +576,35 @@ h1 {
   }
 
   .todo-item {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    min-height: 52px;
-    padding: 8px 10px;
+    grid-template-columns: 28px minmax(0, 1fr) 44px;
+    grid-template-areas: "check content actions";
+    min-height: 96px;
+    padding: 10px;
     column-gap: 10px;
-    align-items: center;
+    align-items: start;
   }
 
   .todo-item.editing {
     grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "check edit";
     align-items: start;
   }
 
+  .todo-checkbox {
+    grid-area: check;
+    margin-top: 10px;
+  }
+
   .todo-content {
-    align-self: center;
+    grid-area: content;
+    align-self: start;
+    padding-top: 2px;
+  }
+
+  .todo-text {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.52;
   }
 
   .priority-badge {
@@ -599,23 +614,39 @@ h1 {
 
   .item-actions {
     display: flex;
-    grid-column: auto;
+    grid-area: actions;
+    flex-direction: column;
     flex-wrap: nowrap;
-    gap: 6px;
+    gap: 8px;
     justify-self: end;
-    align-self: center;
-    width: auto;
+    align-self: start;
+    width: 44px;
   }
 
   .item-actions button {
-    min-width: 52px;
-    width: auto;
-    min-height: 34px;
-    padding: 0 8px;
-    white-space: nowrap;
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    font-size: 0;
+    line-height: 1;
+  }
+
+  .edit-button::before {
+    content: "✏️";
+    font-size: 1.08rem;
+  }
+
+  .delete-button::before {
+    content: "🗑";
+    font-size: 1.08rem;
   }
 
   .edit-form {
+    grid-area: edit;
     grid-template-columns: 1fr;
     min-width: 0;
   }
