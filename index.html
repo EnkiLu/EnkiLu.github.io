@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的待办清单</title>
-  <link rel="stylesheet" href="style.css?v=20260503-1">
+  <link rel="stylesheet" href="style.css?v=20260503-2">
 </head>
 <body>
   <main class="app-shell">
     <section class="todo-panel" aria-labelledby="app-title">
       <header class="app-header">
-        <p class="eyebrow">Todo List</p>
-        <h1 id="app-title"><span class="title-icon" aria-hidden="true">✓</span>我的待办清单</h1>
+        <p class="eyebrow">🧸 Todo List</p>
+        <h1 id="app-title"><span class="title-icon" aria-hidden="true">🧸</span>我的待办清单</h1>
       </header>
 
       <form class="todo-form" id="todo-form">
@@ -20,36 +20,36 @@
           id="todo-input"
           class="todo-input"
           type="text"
-          placeholder="今天要做什么？"
+          placeholder="📝 今天要做什么？"
           autocomplete="off"
           maxlength="80"
         >
         <label class="sr-only" for="priority-select">选择任务优先级</label>
         <select id="priority-select" class="priority-select" aria-label="任务优先级">
-          <option value="high">高优先级</option>
-          <option value="medium" selected>中优先级</option>
-          <option value="low">低优先级</option>
+          <option value="high">🔥 高优先级</option>
+          <option value="medium" selected>⭐ 中优先级</option>
+          <option value="low">🌱 低优先级</option>
         </select>
-        <button class="add-button" type="submit">添加任务</button>
+        <button class="add-button" type="submit">➕ 添加任务</button>
       </form>
 
       <div class="todo-toolbar">
         <div class="stats" aria-live="polite">
-          <span>未完成 <strong id="active-count">0</strong></span>
-          <span>已完成 <strong id="completed-count">0</strong></span>
+          <span>⏳ 未完成 <strong id="active-count">0</strong></span>
+          <span>✅ 已完成 <strong id="completed-count">0</strong></span>
         </div>
         <div class="toolbar-actions">
-          <button class="clear-completed-button" id="clear-completed" type="button">清空已完成</button>
-          <button class="clear-all-button" id="clear-all" type="button">全部清空</button>
+          <button class="clear-completed-button" id="clear-completed" type="button">🧹 清空已完成</button>
+          <button class="clear-all-button" id="clear-all" type="button">🗑 全部清空</button>
         </div>
       </div>
 
       <ul class="todo-list" id="todo-list" aria-label="待办事项列表"></ul>
 
-      <p class="empty-state" id="empty-state">暂无待办事项。请添加新的任务。</p>
+      <p class="empty-state" id="empty-state">✨ 暂无待办事项。请添加新的任务。</p>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260503-2"></script>
 </body>
 </html>

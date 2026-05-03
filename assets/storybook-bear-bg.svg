@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="storybook cartoon teddy bear background">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7efe2"/>
+      <stop offset="0.48" stop-color="#f4dfc4"/>
+      <stop offset="1" stop-color="#ead2f4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="48%" cy="36%" r="62%">
+      <stop offset="0" stop-color="#fff7d6" stop-opacity="0.9"/>
+      <stop offset="0.58" stop-color="#fff7d6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#fff7d6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#6f513a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#sky)"/>
+  <rect width="1600" height="1200" fill="url(#glow)"/>
+
+  <g opacity="0.28" fill="#ffffff">
+    <circle cx="142" cy="160" r="4"/>
+    <circle cx="288" cy="250" r="3"/>
+    <circle cx="1380" cy="188" r="4"/>
+    <circle cx="1230" cy="318" r="3"/>
+    <circle cx="920" cy="126" r="3"/>
+    <circle cx="640" cy="92" r="4"/>
+  </g>
+
+  <g opacity="0.34" fill="#f9f4ed">
+    <path d="M0 878c174-64 352-88 534-72 202 18 386 86 566 88 190 2 350-66 500-112v418H0z"/>
+    <path d="M0 982c196-54 378-74 562-56 190 18 374 74 558 70 178-4 336-58 480-104v308H0z"/>
+  </g>
+
+  <g opacity="0.24" fill="#805f90">
+    <path d="M1020 688h86V528h60v160h74V452h64v236h86V352h78v336h58v72h-506z"/>
+    <path d="M96 734h68V582h44v152h58V506h52v228h68V426h62v308h46v58H96z"/>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <path d="M942 808c86-72 176-102 238-70 78 40 92 160 30 260-68 110-206 156-324 106-88-38-102-142-44-218 22-28 56-54 100-78z" fill="#c69762"/>
+    <path d="M998 770c-54 8-104 48-122 104-20 64 8 136 74 178 84 54 208 38 274-38 68-78 58-190-22-238-54-32-118-16-156 22-8-18-24-32-48-28z" fill="#d6aa78"/>
+    <circle cx="944" cy="764" r="70" fill="#d6aa78"/>
+    <circle cx="1174" cy="744" r="72" fill="#d6aa78"/>
+    <circle cx="944" cy="764" r="38" fill="#b88352"/>
+    <circle cx="1174" cy="744" r="40" fill="#b88352"/>
+    <ellipse cx="1064" cy="850" rx="144" ry="124" fill="#d6aa78"/>
+    <ellipse cx="1068" cy="898" rx="74" ry="52" fill="#f0d8b8"/>
+    <circle cx="1012" cy="832" r="13" fill="#2c211d"/>
+    <circle cx="1118" cy="832" r="13" fill="#2c211d"/>
+    <ellipse cx="1066" cy="872" rx="20" ry="14" fill="#2c211d"/>
+    <path d="M1038 908c18 22 42 22 60 0" fill="none" stroke="#2c211d" stroke-width="8" stroke-linecap="round"/>
+    <path d="M892 984c-44 24-78 72-84 124h134c-2-48 10-88 34-120z" fill="#c69762"/>
+    <path d="M1190 982c46 22 84 70 92 126h-138c2-50-10-90-36-122z" fill="#c69762"/>
+    <path d="M760 736c62 38 118 86 162 144" fill="none" stroke="#c69762" stroke-width="30" stroke-linecap="round"/>
+    <path d="M1292 720c-36 70-88 120-156 150" fill="none" stroke="#c69762" stroke-width="30" stroke-linecap="round"/>
+    <path d="M1286 652l20 48 52 4-40 34 12 50-44-26-44 28 10-52-40-32 52-6z" fill="#fff3aa"/>
+  </g>
+
+  <g opacity="0.7">
+    <path d="M256 320c-30-80 18-148 82-130 52 14 72 78 42 144l-58 126z" fill="#f6d46f"/>
+    <path d="M344 284c-8-84 52-138 108-106 46 26 50 94 8 150l-82 106z" fill="#d9b7f4"/>
+    <path d="M1320 260c-12-82 50-140 110-110 52 26 56 100 8 158l-82 100z" fill="#f3a5a3"/>
+    <path d="M1248 330c-38-76 6-154 76-142 58 10 84 76 56 146l-50 124z" fill="#9cc6f2"/>
+    <path d="M340 438c-18 58-28 112-32 164" fill="none" stroke="#9d7a62" stroke-width="5" stroke-linecap="round"/>
+    <path d="M1354 402c-14 68-18 124-14 176" fill="none" stroke="#9d7a62" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.18" fill="#ffffff">
+    <path d="M538 258l14 34 36 2-28 24 8 36-30-20-32 20 10-36-28-22 36-4z"/>
+    <path d="M1468 506l12 28 30 2-24 20 8 30-26-16-26 18 6-30-22-20 30-4z"/>
+    <path d="M736 614l12 26 30 4-22 20 6 30-26-16-26 16 6-30-22-20 30-4z"/>
+  </g>
+</svg>

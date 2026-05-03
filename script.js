@@ -10,14 +10,23 @@ const clearAllButton = document.querySelector("#clear-all");
 
 const STORAGE_KEY = "fresh-blue-todos";
 const DEFAULT_PRIORITY = "medium";
+const ENTER_ANIMATION_MS = 260;
+const REMOVE_ANIMATION_MS = 260;
 const PRIORITIES = {
   high: "高",
   medium: "中",
   low: "低"
 };
+const PRIORITY_EMOJIS = {
+  high: "🔥",
+  medium: "⭐",
+  low: "🌱"
+};
 
 let todos = loadTodos();
 let editingId = null;
+let enteringId = null;
+const removingIds = new Set();
 
 function loadTodos() {
   try {
@@ -60,7 +69,7 @@ function normalizePriority(priority) {
 function createPriorityOption(value, selectedValue) {
   const option = document.createElement("option");
   option.value = value;
-  option.textContent = `${PRIORITIES[value]}优先级`;
+  option.textContent = `${PRIORITY_EMOJIS[value]} ${PRIORITIES[value]}优先级`;
   option.selected = value === selectedValue;
   return option;
 }
@@ -94,7 +103,9 @@ function addTodo(text) {
     return;
   }
 
-  todos.unshift(createTodo(trimmedText, prioritySelect.value));
+  const todo = createTodo(trimmedText, prioritySelect.value);
+  todos.unshift(todo);
+  enteringId = todo.id;
   input.value = "";
   prioritySelect.value = DEFAULT_PRIORITY;
   saveTodos();
@@ -110,8 +121,32 @@ function toggleTodo(id) {
 }
 
 function deleteTodo(id) {
+  if (removingIds.has(id)) {
+    return;
+  }
+
+  const item = list.querySelector(`[data-todo-id="${id}"]`);
+
+  if (!item || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    completeDeleteTodo(id);
+    return;
+  }
+
+  removingIds.add(id);
+  item.classList.add("removing");
+  window.setTimeout(() => {
+    if (removingIds.has(id)) {
+      completeDeleteTodo(id);
+    }
+  }, REMOVE_ANIMATION_MS + 80);
+
+  item.addEventListener("animationend", () => completeDeleteTodo(id), { once: true });
+}
+
+function completeDeleteTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
   editingId = editingId === id ? null : editingId;
+  removingIds.delete(id);
   saveTodos();
   renderTodos();
 }
@@ -128,7 +163,7 @@ function clearAllTodos() {
     return;
   }
 
-  const confirmed = window.confirm("确定要清空所有任务吗？此操作无法撤销。");
+  const confirmed = window.confirm("⚠️ 确定要清空所有任务吗？此操作无法撤销。");
 
   if (!confirmed) {
     return;
@@ -175,6 +210,16 @@ function renderTodos() {
     const isEditing = todo.id === editingId;
     const item = document.createElement("li");
     item.className = `todo-item priority-${priority}${todo.completed ? " completed" : ""}${isEditing ? " editing" : ""}`;
+    item.dataset.todoId = todo.id;
+
+    if (todo.id === enteringId) {
+      item.classList.add("entering");
+      window.setTimeout(() => {
+        if (enteringId === todo.id) {
+          enteringId = null;
+        }
+      }, ENTER_ANIMATION_MS);
+    }
 
     const checkbox = document.createElement("input");
     checkbox.className = "todo-checkbox";
@@ -203,12 +248,12 @@ function renderTodos() {
       const saveButton = document.createElement("button");
       saveButton.className = "save-button";
       saveButton.type = "submit";
-      saveButton.textContent = "保存";
+      saveButton.textContent = "💾 保存";
 
       const cancelButton = document.createElement("button");
       cancelButton.className = "cancel-button";
       cancelButton.type = "button";
-      cancelButton.textContent = "取消";
+      cancelButton.textContent = "↩ 取消";
       cancelButton.addEventListener("click", cancelEditing);
 
       editActions.append(saveButton, cancelButton);
@@ -233,7 +278,7 @@ function renderTodos() {
 
     const priorityBadge = document.createElement("span");
     priorityBadge.className = `priority-badge priority-${priority}`;
-    priorityBadge.textContent = `${PRIORITIES[priority]}优先级`;
+    priorityBadge.textContent = `${PRIORITY_EMOJIS[priority]} ${PRIORITIES[priority]}优先级`;
 
     const actions = document.createElement("div");
     actions.className = "item-actions";
@@ -241,14 +286,14 @@ function renderTodos() {
     const editButton = document.createElement("button");
     editButton.className = "edit-button";
     editButton.type = "button";
-    editButton.textContent = "编辑";
+    editButton.textContent = "✏️ 编辑";
     editButton.setAttribute("aria-label", `编辑任务：${todo.text}`);
     editButton.addEventListener("click", () => startEditing(todo.id));
 
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete-button";
     deleteButton.type = "button";
-    deleteButton.textContent = "删除";
+    deleteButton.textContent = "🗑 删除";
     deleteButton.setAttribute("aria-label", `删除任务：${todo.text}`);
     deleteButton.addEventListener("click", () => deleteTodo(todo.id));
 
