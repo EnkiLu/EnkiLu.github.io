@@ -62,7 +62,15 @@ button {
 }
 
 .app-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
   margin-bottom: 24px;
+}
+
+.app-header > div {
+  min-width: 0;
 }
 
 .eyebrow {
@@ -83,6 +91,19 @@ h1 {
   line-height: 1.14;
 }
 
+.plan-summary {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  background: var(--primary-soft);
+  font-size: 0.86rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .title-icon {
   display: inline-grid;
   place-items: center;
@@ -98,14 +119,23 @@ h1 {
 
 .todo-form {
   display: grid;
-  grid-template-columns: 1fr 138px auto;
+  grid-template-columns: 1fr 138px 150px auto;
   gap: 12px;
   margin-bottom: 20px;
 }
 
+.todo-form > *,
+.organize-row > * {
+  min-width: 0;
+}
+
 .todo-input,
 .priority-select,
+.due-date-input,
+.search-input,
+.sort-select,
 .edit-input,
+.edit-due-date-input,
 .edit-priority-select {
   width: 100%;
   min-height: 52px;
@@ -119,6 +149,7 @@ h1 {
 }
 
 .priority-select,
+.sort-select,
 .edit-priority-select {
   appearance: none;
   background-image:
@@ -134,7 +165,11 @@ h1 {
 
 .todo-input:focus,
 .priority-select:focus,
+.due-date-input:focus,
+.search-input:focus,
+.sort-select:focus,
 .edit-input:focus,
+.edit-due-date-input:focus,
 .edit-priority-select:focus {
   border-color: var(--primary);
   background-color: #ffffff;
@@ -164,11 +199,10 @@ h1 {
   transform: translateY(0);
 }
 
-.todo-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.todo-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 12px;
   margin-bottom: 18px;
 }
 
@@ -201,6 +235,46 @@ h1 {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
+}
+
+.filter-tabs {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--primary-soft);
+}
+
+.filter-tab {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 800;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.filter-tab.active {
+  color: #ffffff;
+  background: var(--primary);
+}
+
+.organize-row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 8px;
+}
+
+.search-input,
+.sort-select {
+  min-height: 42px;
+  padding: 0 12px;
 }
 
 .clear-completed-button,
@@ -303,7 +377,7 @@ h1 {
 
 .todo-content {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -325,6 +399,37 @@ h1 {
   color: #ffffff;
   font-size: 0.78rem;
   font-weight: 700;
+}
+
+.todo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.due-badge {
+  width: fit-content;
+  min-height: 24px;
+  padding: 2px 9px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  background: var(--surface);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.due-badge.today {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: #ffffff;
+}
+
+.due-badge.overdue {
+  border-color: var(--border-strong);
+  color: #ffffff;
+  background: var(--primary);
 }
 
 .priority-badge.priority-high {
@@ -355,6 +460,7 @@ h1 {
 }
 
 .edit-input,
+.edit-due-date-input,
 .edit-priority-select {
   min-height: 42px;
   border-radius: 6px;
@@ -477,7 +583,18 @@ h1 {
   }
 
   .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 12px;
+  }
+
+  .plan-summary {
+    width: 100%;
+    min-height: 32px;
+    padding: 7px 8px;
+    font-size: 0.78rem;
+    text-align: center;
   }
 
   .eyebrow {
@@ -497,26 +614,31 @@ h1 {
   }
 
   .todo-form {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
     margin-bottom: 10px;
   }
 
+  .todo-input {
+    grid-column: 1 / -1;
+  }
+
   .todo-input,
-  .priority-select {
+  .priority-select,
+  .due-date-input {
     min-height: 42px;
     padding: 0 12px;
   }
 
   .add-button {
+    grid-column: 1 / -1;
     width: 100%;
     min-height: 42px;
     padding: 0 16px;
   }
 
-  .todo-toolbar {
-    align-items: stretch;
-    flex-direction: column;
+  .todo-controls {
+    grid-template-columns: 1fr;
     gap: 8px;
     margin-bottom: 10px;
   }
@@ -537,6 +659,27 @@ h1 {
   .toolbar-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .filter-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .filter-tab {
+    min-height: 34px;
+    padding: 0 4px;
+    font-size: 0.78rem;
+  }
+
+  .organize-row {
+    grid-template-columns: 1fr;
+  }
+
+  .search-input,
+  .sort-select {
+    min-height: 38px;
   }
 
   .toolbar-actions,
@@ -607,7 +750,12 @@ h1 {
     line-height: 1.52;
   }
 
-  .priority-badge {
+  .todo-meta {
+    gap: 5px;
+  }
+
+  .priority-badge,
+  .due-badge {
     min-height: 22px;
     font-size: 0.74rem;
   }

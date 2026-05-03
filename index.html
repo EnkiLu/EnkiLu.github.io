@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的待办清单</title>
-  <link rel="stylesheet" href="style.css?v=20260503-4">
+  <title>我的计划清单</title>
+  <link rel="stylesheet" href="style.css?v=20260503-5">
 </head>
 <body>
   <main class="app-shell">
     <section class="todo-panel" aria-labelledby="app-title">
       <header class="app-header">
-        <p class="eyebrow">🧸 Todo List</p>
-        <h1 id="app-title"><span class="title-icon" aria-hidden="true">🧸</span>我的待办清单</h1>
+        <div>
+          <p class="eyebrow">🧸 Plan List</p>
+          <h1 id="app-title"><span class="title-icon" aria-hidden="true">🧸</span>我的计划清单</h1>
+        </div>
+        <p class="plan-summary" id="plan-summary" aria-live="polite">今日 0 · 逾期 0 · 进行中 0</p>
       </header>
 
       <form class="todo-form" id="todo-form">
@@ -22,7 +25,7 @@
           type="text"
           placeholder="📝 今天要做什么？"
           autocomplete="off"
-          maxlength="80"
+          maxlength="120"
         >
         <label class="sr-only" for="priority-select">选择任务优先级</label>
         <select id="priority-select" class="priority-select" aria-label="任务优先级">
@@ -30,26 +33,56 @@
           <option value="medium" selected>⭐ 中优先级</option>
           <option value="low">🌱 低优先级</option>
         </select>
+        <label class="sr-only" for="due-date-input">选择截止日期</label>
+        <input
+          id="due-date-input"
+          class="due-date-input"
+          type="date"
+          aria-label="截止日期"
+        >
         <button class="add-button" type="submit">➕ 添加任务</button>
       </form>
 
-      <div class="todo-toolbar">
+      <section class="todo-controls" aria-label="计划筛选和整理工具">
         <div class="stats" aria-live="polite">
           <span>⏳ 未完成 <strong id="active-count">0</strong></span>
           <span>✅ 已完成 <strong id="completed-count">0</strong></span>
+        </div>
+        <div class="filter-tabs" role="tablist" aria-label="筛选计划">
+          <button class="filter-tab active" type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button class="filter-tab" type="button" data-filter="active" aria-pressed="false">进行中</button>
+          <button class="filter-tab" type="button" data-filter="today" aria-pressed="false">今日</button>
+          <button class="filter-tab" type="button" data-filter="completed" aria-pressed="false">已完成</button>
+        </div>
+        <div class="organize-row">
+          <label class="sr-only" for="search-input">搜索计划</label>
+          <input
+            id="search-input"
+            class="search-input"
+            type="search"
+            placeholder="🔎 搜索计划"
+            autocomplete="off"
+          >
+          <label class="sr-only" for="sort-select">选择排序方式</label>
+          <select id="sort-select" class="sort-select" aria-label="排序方式">
+            <option value="smart">智能排序</option>
+            <option value="newest">最新添加</option>
+            <option value="due">截止日期</option>
+            <option value="priority">优先级</option>
+          </select>
         </div>
         <div class="toolbar-actions">
           <button class="clear-completed-button" id="clear-completed" type="button">🧹 清空已完成</button>
           <button class="clear-all-button" id="clear-all" type="button">🗑 全部清空</button>
         </div>
-      </div>
+      </section>
 
       <ul class="todo-list" id="todo-list" aria-label="待办事项列表"></ul>
 
-      <p class="empty-state" id="empty-state">✨ 暂无待办事项。请添加新的任务。</p>
+      <p class="empty-state" id="empty-state">✨ 暂无计划。先写下一个今天可以推进的小目标。</p>
     </section>
   </main>
 
-  <script src="script.js?v=20260503-2"></script>
+  <script src="script.js?v=20260503-5"></script>
 </body>
 </html>
